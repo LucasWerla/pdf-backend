@@ -12,7 +12,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 app.post('/api/convert', upload.single('pdf'), async (req, res) => {
   if (!req.file || req.file.mimetype !== 'application/pdf')
     return res.status(400).json({ error: 'Arquivo inválido. Envie um PDF.' });
-  
+
   try {
     const data = await pdfParse(req.file.buffer);
     const text = data.text.toLowerCase();
